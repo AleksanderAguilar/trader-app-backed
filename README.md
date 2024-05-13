@@ -1,3 +1,1 @@
 # trader-app-backed
-
-Test
