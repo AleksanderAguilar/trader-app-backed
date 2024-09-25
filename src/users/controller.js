@@ -70,8 +70,8 @@ const updateUser = (req, res) => {
 
 
 const login = async (req, res) => {
-    const { email, password } = req.body;
 
+    const { email, password } = req.body;
     const user = await userModel.findUserByEmail(email);
     if (!user || user.password != password) {
         res.status(401).json({ message: 'Invalid username or password' });
@@ -79,11 +79,11 @@ const login = async (req, res) => {
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.status(200).json({
             email : user.email,
-            token : token
+            token : token,
+            role : user.role,
         });
         console.log('login successful');
     }
-
 
 }
 
