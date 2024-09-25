@@ -2,12 +2,12 @@ const pool = require('../../db');
 const queries = require('./queries');
 
 const findUserByEmail = async (email) => {
-    return new Promise((resolve, reject) => {
-        pool.query(queries.getUserByEmail, [email], (error, results) => {
-            if (error) reject(error);
-            resolve(results.rows[0]);
-        });
-    });
+    try {
+        const results = await pool.query(queries.getUserByEmail, [email]);
+        return results.rows[0];
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = {
